@@ -7,9 +7,7 @@ struct Rect {
     double x, y, w, h;
 };
 
-// เปลี่ยนมารับเป็น Pointer (Rect* R1, Rect* R2)
 double overlap(Rect* R1, Rect* R2) {
-    // ใช้ R1->x แทน R1.x เมื่อตัวแปรเป็น Pointer
     double R1_L = R1->x - R1->w / 2.0;
     double R1_R = R1->x + R1->w / 2.0;
     double R1_B = R1->y - R1->h / 2.0;
