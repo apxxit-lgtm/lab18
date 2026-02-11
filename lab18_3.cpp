@@ -33,16 +33,16 @@ student text2student(string text) {
         else if(count == 3) gpa += text[i];
     }
     
-    // [Missing Code 2] แปลง string เป็นชนิดข้อมูลที่ถูกต้องและ return ค่า
-    s.name = name;
-    s.id = stoi(id);         // แปลง string id เป็น int
-    s.gender = gen[0];       // ดึงตัวอักษรแรกจาก string เป็น char
-    s.gpa = stof(gpa);       // แปลง string gpa เป็น float
     
-    return s;                // คืนค่าโครงสร้าง student ที่สร้างเสร็จแล้ว
+    s.name = name;
+    s.id = stoi(id);         
+    s.gender = gen[0];     
+    s.gpa = stof(gpa);       
+    
+    return s;              
 }
 
-// [Missing Code 4] ต้องรับค่า vector แบบ reference (&) เพื่อให้ pointer ที่ส่งกลับไปใช้งานได้จริง
+
 student * findstudent(vector<student> &allstudents, int key) { 
     for(unsigned int i = 0; i < allstudents.size(); i++) {
         if(allstudents[i].id == key) return &allstudents[i];
@@ -102,7 +102,7 @@ int main() {
             if(textline == "> Students") {
                 state = 3;
             } else {
-                // [Missing Code 3] เพิ่มชื่ออาจารย์ลงใน course ล่าสุด
+           
                 allcourses.back().lecture_list.push_back(textline);
             }            
         } else {
@@ -110,7 +110,7 @@ int main() {
                 state = 1;
             } else {
                 student *p = findstudent(allstudents, atof(textline.c_str()));
-                // [Missing Code 5] เพิ่ม pointer ของนักเรียนลงใน course ล่าสุด
+        
                 if(p != 0) allcourses.back().student_list.push_back(p);
             }
         }
