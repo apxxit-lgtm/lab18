@@ -7,22 +7,30 @@ struct Rect {
     double x, y, w, h;
 };
 
-double overlap(Rect* R1, Rect* R2) {
-    double R1_L = R1->x - R1->w / 2.0;
-    double R1_R = R1->x + R1->w / 2.0;
-    double R1_B = R1->y - R1->h / 2.0;
-    double R1_T = R1->y + R1->h / 2.0;
 
-    double R2_L = R2->x - R2->w / 2.0;
-    double R2_R = R2->x + R2->w / 2.0;
-    double R2_B = R2->y - R2->h / 2.0;
-    double R2_T = R2->y + R2->h / 2.0;
+double overlap(Rect *R1, Rect *R2) {
+    double L1 = R1->x;
+    double R1_right = R1->x + R1->w;
+    double T1 = R1->y;
+    double B1 = R1->y - R1->h; 
 
-    // หาพื้นที่ทับซ้อน
-    double overlap_w = min(R1_R, R2_R) - max(R1_L, R2_L);
-    double overlap_h = min(R1_T, R2_T) - max(R1_B, R2_B);
+    double L2 = R2->x;
+    double R2_right = R2->x + R2->w;
+    double T2 = R2->y;
+    double B2 = R2->y - R2->h;
 
-    if (overlap_w <= 0 || overlap_h <= 0) return 0;
+    double overlap_L = max(L1, L2);
+    double overlap_R = min(R1_right, R2_right);
+    double overlap_T = min(T1, T2);
+    double overlap_B = max(B1, B2);
+
+    double overlap_w = overlap_R - overlap_L;
+    double overlap_h = overlap_T - overlap_B;
+
+    if (overlap_w <= 0 || overlap_h <= 0) {
+        return 0;
+    }
 
     return overlap_w * overlap_h;
 }
+
